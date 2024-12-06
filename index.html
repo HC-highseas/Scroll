@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import 'normalize.css';
+
+        * ,   
+        *:after ,   
+        *:before {
+            box-sizing: border-box;
+        }
+
+        html {
+            color-scheme: light only;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: 'SF Pro Text' ,    'SF Pro Icons' ,    'AOS Icons' ,    'Helvetica Neue' ,   
+                Helvetica ,    Arial ,    sans-serif ,    system-ui;
+            overflow: auto;
+        }
+
+        body::before {
+            --size: 45px;
+            --line: color-mix(in lch ,    canvasText ,    transparent 70%);
+            content: '';
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            background: linear-gradient(90deg ,   
+                    var(--line) 1px ,   
+                    transparent 1px var(--size)) 50% 50% / var(--size) var(--size) ,   
+                linear-gradient(var(--line) 1px ,    transparent 1px var(--size)) 50% 50% / var(--size) var(--size);
+            mask: linear-gradient(-20deg ,    transparent 50% ,    white);
+            top: 0;
+            transform-style: flat;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .b_l {
+            color: white;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            width: 48px;
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            z-index: 1000;
+        }
+
+        :where(.x-link ,    .bear-link):is(:hover ,    :focus-visible) {
+            opacity: 1;
+        }
+
+        .b_l svg {
+            width: 75%;
+        }
+
+        :root {
+            --info-size: 35vh;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            font-family: ui-monospace ,    'Cascadia Code' ,    'Source Code Pro' ,    Menlo ,    Consolas ,   
+                'DejaVu Sans Mono' ,    monospace;
+            overflow: auto;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            background: canvasText;
+            color: canvas;
+            padding: 0 1rem;
+            z-index: 3;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255 ,    255 ,    255 ,    0.1);
+        }
+
+        article {
+            max-width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: calc(100vh - var(--info-size)) var(--info-size);
+            view-timeline: --article;
+        }
+
+        .art_img {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--info-size);
+            animation: in-n-out both linear;
+            animation-timeline: --article;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        article img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            height: calc(100vh - var(--info-size));
+            animation: filter-out both linear;
+            animation-timeline: --article;
+            animation-range: exit 0% cover 100%;
+        }
+
+        @keyframes filter-out {
+            100% {
+                filter: brightness(2);
+                translate: 0 -60%;
+            }
+        }
+
+        @keyframes in-n-out {
+
+            0% ,   
+            100% {
+                opacity: 0;
+            }
+
+            10% ,   
+            60% {
+                opacity: 1;
+            }
+        }
+
+        .art_i {
+            text-align: center;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            align-content: center;
+            gap: 0.5rem;
+            height: var(--info-size);
+        }
+
+        main {
+            width: 100%;
+        }
+
+        a:not(.bear-link) {
+            text-transform: uppercase;
+            font-weight: 600;
+            color: hsl(0 0% 98%);
+            background: hsl(0 0% 0%);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            word-spacing: 0.2rem;
+            font-size: 1.25rem;
+            border-radius: 4px;
+            transition: background 0.1s;
+        }
+
+        a:hover {
+            background: hsl(0 0% 40%);
+        }
+
+        .art_i {
+            background: canvas;
+        }
+
+        @media (min-width: 768px) {
+            article {
+                width: 100%;
+                display: grid;
+                place-items: start;
+                z-index: calc(var(--count ,    10) - var(--index ,    0));
+                position: relative;
+                grid-template-rows: unset;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                z-index: 100;
+            }
+
+            .art_i {
+                background: transparent;
+                height: 100vh;
+                width: 40%;
+                display: grid;
+                place-items: center;
+                padding: 1rem;
+                gap: 1rem;
+                align-content: center;
+            }
+
+            .art_img {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 40%;
+                bottom: 0;
+                height: 100vh;
+                animation: none;
+            }
+
+            .art_img {
+                animation: brighten both linear;
+                animation-timeline: --article;
+                animation-range: entry 0% entry 50%;
+            }
+
+            .art_img img {
+                animation: clip-out both linear;
+                animation-timeline: --article;
+                animation-range: exit 0% exit 100%;
+                height: 100%;
+            }
+        }
+
+        @keyframes brighten {
+            0% {
+                filter: brightness(2);
+            }
+
+            100% {
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes clip-out {
+            0% {
+                clip-path: inset(0 0 0 0);
+            }
+
+            100% {
+                filter: brightness(0.5);
+                clip-path: inset(100% 0 0 0);
+            }
+        }
+
+        footer {
+            z-index:10;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        #topBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #topBtn:hover {
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="b_l" href="" target="_blank" rel="noreferrer noopener">
+        <svg class="w-9" viewBox="0 0 969 955" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="161.191" cy="320.191" r="133.191" stroke="currentColor" stroke-width="20"></circle>
+            <circle cx="806.809" cy="320.191" r="133.191" stroke="currentColor" stroke-width="20"></circle>
+            <circle cx="695.019" cy="587.733" r="31.4016" fill="currentColor"></circle>
+            <circle cx="272.981" cy="587.733" r="31.4016" fill="currentColor"></circle>
+            <path d="M564.388 712.083C564.388 743.994 526.035 779.911 483.372 779.911C440.709 779.911 402.356 743.994 402.356 712.083C402.356 680.173 440.709 440.709 664.353 483.372 664.353C526.035 664.353 564.388 680.173 564.388 712.083Z" fill="currentColor"></path>
+            <rect x="310.42" y="448.31" width="343.468" height="51.4986" fill="#FF1E1E"></rect>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M745.643 288.24C815.368 344.185 854.539 432.623 854.539 511.741H614.938V454.652C614.938 433.113 597.477 415.652 575.938 415.652H388.37C366.831 415.652 349.37 433.113 349.37 454.652V511.741L110.949 511.741C110.949 432.623 150.12 344.185 219.845 288.24C289.57 232.295 384.138 200.865 482.744 200.865C581.35 200.865 675.918 232.295 745.643 288.24Z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="#section1">Section 1</a></li>
+            <li><a href="#section2">Section 2</a></li>
+            <li><a href="#section3">Section 3</a></li>
+            <li><a href="#section4">Section 4</a></li>
+            <li><a href="#section5">Section 5</a></li>
+        </ul>
+    </nav>
+    <main>
+        <article style="--index: 0" id="section1">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=1" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>CSS Scroll Animations</h2>
+                <p>Check out this rad demo</p>
+                <a href="#">Follow</a>
+            </div>
+        </article>
+        <article style="--index: 1" id="section2">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=2" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Animate on scroll</h2>
+                <p>Works with media queries too</p>
+                <a href="#">Check it out</a>
+            </div>
+        </article>
+        <article style="--index: 2" id="section3">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=3" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Parallax Effects</h2>
+                <p>Tweak your timings</p>
+                <a href="#">Get Styling</a>
+            </div>
+        </article>
+        <article style="--index: 3" id="section4">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=4" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Drive Keyframes</h2>
+                <p>CSS alone and...</p>
+                <a href="#">No JavaScript</a>
+            </div>
+        </article>
+        <article style="--index: 4" id="section5">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=5" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Extra Slides</h2>
+                <p>More content because...</p>
+                <a href="#">CSS to the moon</a>
+            </div>
+        </article>
+        <article style="--index: 5">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=6" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Resize Window</h2>
+                <p>Try resizing the window</p>
+                <a href="#">Resize</a>
+            </div>
+        </article>
+        <article style="--index: 6">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=7" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Browser support</h2>
+                <p>You'll need to be in Chrome</p>
+                <a href="#">Do it</a>
+            </div>
+        </article>
+        <article style="--index: 7">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=8" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Your idea</h2>
+                <p>What would you make?</p>
+                <a href="#">Code</a>
+            </div>
+        </article>
+        <article style="--index: 8">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=9" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Fork</h2>
+                <p>Fork this and make it your own!</p>
+                <a href="#">Duplicate</a>
+            </div>
+        </article>
+        <article style="--index: 9">
+            <div class="art_img">
+                <img src="https://picsum.photos/1920/1080?random=10" alt="" />
+            </div>
+            <div class="art_i">
+                <h2>Heart</h2>
+                <p>If you like this ,    heart it (3x)</p>
+                <a href="#">Like</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <p>© 2024 Your Company. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+    <button id="topBtn" title="Go to top">Top</button>
+
+    <script>
+        // Get the button:
+        let mybutton = document.getElementById("topBtn");
+
+        // When the user scrolls down 20px from the top of the document ,    show the button
+        window.onscroll = function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        };
+
+        // When the user clicks on the button ,    scroll to the top of the document
+        mybutton.onclick = function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        };
+    </script>
+</body>
+
+</html>
+
